@@ -34,11 +34,12 @@ public class Controller implements IController {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see contract.IController#control()
 	 */
 	public void control() {
-		this.view.printMap("Appuyer sur les touches '1', '2', '3' '4' ou '5', pour charger le niveau de votre choix.");
+		//this.view.printMap("Appuyer sur les touches '1', '2', '3' '4' ou '5', pour charger le niveau de votre choix.");
+		this.model.loadMap("MAP1");
 	}
 
 	/**
@@ -73,13 +74,13 @@ public class Controller implements IController {
 		String[] lines = tilemap.split("\n");
 		int x = lines.length;
 		int y = lines[0].length();
-		String[][] map = new String[x][y];
+		String[][] map = new String[y][x];
 		Hashtable<Character, String> assocSprite = this.view.getAssocSprite();
 		for(int i = 0; i < x; i++)
 		{
 			for(int j = 0; j < y; j++)
 			{
-				map[i][j] = assocSprite.get(lines[i].charAt(j));
+				map[j][i] = assocSprite.get(lines[i].charAt(j));
 			}
 		}
 		return map;
