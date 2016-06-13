@@ -86,7 +86,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	 *
 	 * @return the controller
 	 */
-	private IController getController() {
+	public IController getController() {
 		return this.controller;
 	}
 
@@ -131,10 +131,23 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setResizable(false);
 		this.addKeyListener(this);
 		this.setContentPane(new ViewPanel(this));
-		this.setSize(400 + this.getInsets().left + this.getInsets().right, 60 + this.getInsets().top + this.getInsets().bottom);
+		this.setSize(400, 60);
 		this.setLocationRelativeTo(null);
 	}
 
+
+	/**
+	 * Modified windows size taking border in count
+	 *
+	 * @param width
+	 * @param height
+	 */
+	public void setSize(int width, int height) {
+		//System.out.println(width);
+		//System.out.println(height);
+		super.setSize(width + this.getInsets().left + this.getInsets().right,
+				height + this.getInsets().top + this.getInsets().bottom);
+	}
 	/**
 	 * Prints the message.
 	 *
