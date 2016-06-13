@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.event.KeyEvent;
+import java.util.Hashtable;
 
 import javax.swing.SwingUtilities;
 
@@ -19,6 +20,13 @@ public class View implements IView, Runnable {
 	/** The frame. */
 	private final ViewFrame viewFrame;
 
+	public Hashtable<Character, String> getAssocSprite()
+	{
+		return assocSprite;
+	}
+
+	private Hashtable<Character, String> assocSprite = new Hashtable<Character, String>();
+
 	/**
 	 * Instantiates a new view.
 	 *
@@ -29,6 +37,24 @@ public class View implements IView, Runnable {
 		this.viewFrame = new ViewFrame(model);
 		SwingUtilities.invokeLater(this);
 	}
+
+	private void fillAssoc()
+	{
+		this.assocSprite.put('B', "bone.png");
+		this.assocSprite.put('K', "crystal_ball.png");
+		this.assocSprite.put('H', "horizontal_bone.png");
+		this.assocSprite.put('V', "vertical_bone.png");
+		this.assocSprite.put('C', "gate_closed.png");
+		this.assocSprite.put('O', "gate_open.png");
+		this.assocSprite.put('P', "purse.png");
+		this.assocSprite.put('L', "lorann_b.png");
+		this.assocSprite.put('1', "monster_1.png");
+		this.assocSprite.put('2', "monster_2.png");
+		this.assocSprite.put('3', "monster_3.png");
+		this.assocSprite.put('4', "monster_4.png");
+		this.assocSprite.put(' ', "");
+	}
+
 
 	/**
 	 * Key code to controller order.

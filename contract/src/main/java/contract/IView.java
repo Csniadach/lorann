@@ -1,5 +1,7 @@
 package contract;
 
+import java.util.Hashtable;
+
 /**
  * The Interface IView.
  *
@@ -21,4 +23,5 @@ public interface IView {
 	 *          the map
 	 */
 	void printMap(final String map);
+	Hashtable<Character, String> getAssocSprite();
 }
