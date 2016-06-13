@@ -23,6 +23,7 @@ public class Model extends Observable implements IModel {
 	 */
 	public Model() {
 		this.map = "";
+		this.loadMap("MAP1");
 	}
 
 
@@ -82,6 +83,11 @@ public class Model extends Observable implements IModel {
 		this.setChanged();
 		this.notifyObservers();
 	}
+
+	/** get the map from the database
+	 *
+	 *  @param key
+	 * */
 	public void loadMap(String key) {
 		try {
 			final DAOLoadMap daoLoadMap = new DAOLoadMap(DBConnection.getInstance().getConnection());

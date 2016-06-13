@@ -35,6 +35,7 @@ public class View implements IView, Runnable {
 	 */
 	public View(final IModel model) {
 		this.viewFrame = new ViewFrame(model);
+		this.fillAssoc();
 		SwingUtilities.invokeLater(this);
 	}
 
@@ -87,6 +88,8 @@ public class View implements IView, Runnable {
 	 *
 	 * @see contract.IView#printMessage(java.lang.String)
 	 */
+
+	/** allow the display of the map */
 	public void printMap(final String map) {
 		this.viewFrame.printMap(map);
 	}
