@@ -12,7 +12,7 @@ public enum ControllerOrder {
 	Francais, /** The Deutch. */
 	Deutsch, /** The Indonesia. */
 	Indonesia,
-	MAP1,
+	MAP1,			/** i added the maps there*/
 	MAP2,
 	MAP3,
 	MAP4,

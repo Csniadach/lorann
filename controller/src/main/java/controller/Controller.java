@@ -64,6 +64,8 @@ public class Controller implements IController {
 	 *
 	 * @see contract.IController#orderPerform(contract.ControllerOrder)
 	 */
+
+	/** the loading the map in function of the map_name on the database*/
 	public void orderPerform(final ControllerOrder controllerOrder) {
 		switch (controllerOrder) {
 			case MAP1:

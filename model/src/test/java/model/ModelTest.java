@@ -62,24 +62,30 @@ public class ModelTest {
 	/**
 	 * Test method for {@link model.Model#getMessage()}.
 	 */
-	@Test
-	public void testGetMessage() {
-		Assert.assertEquals("", this.model.getMessage());
-	}
-
+	
 	/**
 	 * Test method for {@link model.Model#loadMessage(java.lang.String)}.
 	 */
+
+
 	@Test
-	public void testGetMessageString() {
-		this.model.loadMessage("GB");
-		Assert.assertEquals("Hello world", this.model.getMessage());
-		this.model.loadMessage("FR");
-		Assert.assertEquals("Bonjour le monde", this.model.getMessage());
-		this.model.loadMessage("DE");
-		Assert.assertEquals("Hallo Welt", this.model.getMessage());
-		this.model.loadMessage("ID");
-		Assert.assertEquals("Salamat pagi dunia", this.model.getMessage());
+	public void testGetMessage1() throws Exception {
+
 	}
 
+
+	@Test
+	public void testGetObservable() throws Exception {
+
+	}
+
+	@Test
+	public void testGetMap() throws Exception {
+
+	}
+
+	@Test
+	public void testLoadMap() throws Exception {
+
+	}
 }

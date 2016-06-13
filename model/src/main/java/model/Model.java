@@ -71,6 +71,9 @@ public class Model extends Observable implements IModel {
 		return this;
 	}
 
+
+	/** i added the map functions in general here*/
+
 	public String getMap() {
 		return this.map;
 	}
