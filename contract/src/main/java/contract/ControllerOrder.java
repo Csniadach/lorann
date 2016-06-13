@@ -11,5 +11,11 @@ public enum ControllerOrder {
 	English, /** The French. */
 	Francais, /** The Deutch. */
 	Deutsch, /** The Indonesia. */
-	Indonesia
+	Indonesia,
+	MAP1,			/** i added the maps there*/
+	MAP2,
+	MAP3,
+	MAP4,
+	MAP5,
+	test
 }
