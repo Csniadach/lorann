@@ -12,7 +12,7 @@ public enum ControllerOrder {
 	Francais, /** The Deutch. */
 	Deutsch, /** The Indonesia. */
 	Indonesia,
-	MAP1,			/** i added the maps there*/
+	MAP1,			/** i added the maps there so that you can link the key listenner and the associated functions*/
 	MAP2,
 	MAP3,
 	MAP4,
