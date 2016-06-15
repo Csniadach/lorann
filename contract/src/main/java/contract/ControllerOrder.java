@@ -27,5 +27,6 @@ public enum ControllerOrder {
 	MOVEUP,
 	MOVEDOWN,
 	MOVELEFT,
-	MOVERIGHT
+	MOVERIGHT,
+	FIRE
 }

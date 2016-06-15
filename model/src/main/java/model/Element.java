@@ -13,22 +13,25 @@ import java.io.IOException;
  * Created by SNIADACH Cyril
  */
 public abstract class Element implements IElement {
-    private BufferedImage image = null;
-    private boolean     permeability;
+    protected BufferedImage image = null;
+    protected boolean     permeability;
 
     public Element(String path, boolean permeability)
     {
         if(!path.equals("")) {
-            try {
-                this.image = ImageIO.read(new File(
-                        String.format("sprite\\%s", path)));
-            } catch (IOException e) {
-                System.out.println(String.format("sprite\\%s", path));
-                e.printStackTrace();
-            }
+            this.loadSprite(String.format("sprite\\%s", path));
         }
         this.permeability = permeability;
     }
+
+    public void loadSprite(String path) {
+        try {
+        this.image = ImageIO.read(new File(path));
+            } catch (IOException e) {
+            e.printStackTrace();
+
+            }
+        }
 
     public BufferedImage getImage()
     {
