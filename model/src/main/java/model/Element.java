@@ -13,16 +13,11 @@ import java.io.IOException;
  * Created by SNIADACH Cyril
  */
 public abstract class Element implements IElement {
-    private int         x;
-    private int         y;
     private BufferedImage image = null;
     private boolean     permeability;
 
     public Element(String path, boolean permeability)
     {
-        if (path == null) {
-            System.out.println("/!\\ERROR/!\\SPRITE PATH FOR " + x + y + " IMAGE IS NULL/!\\ERROR/!\\");
-        }
         if(!path.equals("")) {
             try {
                 this.image = ImageIO.read(new File(

@@ -19,12 +19,15 @@ import contract.IModel;
 class ViewFrame extends JFrame implements KeyListener {
 
 	/** The model. */
-	private IModel						model;
+	private IModel model;
 
 	/** The controller. */
-	private IController				controller;
+	private IController controller;
+
+
+	private ViewPanel viewPanel;
 	/** The Constant serialVersionUID. */
-	private static final long	serialVersionUID	= -697358409737458175L;
+	private static final long serialVersionUID = -697358409737458175L;
 
 	/**
 	 * Instantiates a new view frame.
@@ -126,15 +129,21 @@ class ViewFrame extends JFrame implements KeyListener {
 	 *          the model
 	 */
 	private void buildViewFrame(final IModel model) {
+		this.viewPanel = new ViewPanel(this);
 		this.setModel(model);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.addKeyListener(this);
-		this.setContentPane(new ViewPanel(this));
+		this.setContentPane(this.viewPanel);
 		this.setSize(400, 60);
 		this.setLocationRelativeTo(null);
 	}
 
+	public void update() {
+		this.viewPanel.update(
+				this.controller.getTileMap()
+		);
+	}
 
 	/**
 	 * Modified windows size taking border in count
@@ -143,19 +152,18 @@ class ViewFrame extends JFrame implements KeyListener {
 	 * @param height
 	 */
 	public void setSize(int width, int height) {
-		//System.out.println(width);
-		//System.out.println(height);
 		super.setSize(width + this.getInsets().left + this.getInsets().right,
 				height + this.getInsets().top + this.getInsets().bottom);
 	}
+
 	/**
 	 * Prints the message.
 	 *
-	 * @param map
+	 * @param message
 	 *          the message
 	 */
-	public void printMap(final String map) {
-		JOptionPane.showMessageDialog(null, map);
+	public void printMessage(final String message) {
+		JOptionPane.showMessageDialog(null, message);
 	}
 
 	/*
