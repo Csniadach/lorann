@@ -160,12 +160,14 @@ public class Controller implements IController, Observer {
 		}
 	}
 
+	/** checking the permability and if the hero gets out of the map */
+
 	public void movehero(MobileOrder order) {
 		Point pos = this.hero.getPos();
-		if ((order == MobileOrder.Up && this.hero.getPos().getX() > 0) ||
-				(order == MobileOrder.Down && this.hero.getPos().getX() < view.getHeight() / 32 - 2) ||
-				(order == MobileOrder.Left && this.hero.getPos().getY() > 0) ||
-				(order == MobileOrder.Right && this.hero.getPos().getY() < view.getWidth() / 32 - 1)) {
+		if ((order == MobileOrder.Up && this.hero.getPos().getX() > 0 && getTileMap()[(int)this.hero.getPos().getX() - 1][(int)this.hero.getPos().getY()].getPermeability()) ||
+				(order == MobileOrder.Down && this.hero.getPos().getX() < view.getHeight() / 32 - 1 && getTileMap()[(int)this.hero.getPos().getX() + 1][(int)this.hero.getPos().getY()].getPermeability()) ||
+				(order == MobileOrder.Left && this.hero.getPos().getY() > 0 && getTileMap()[(int)this.hero.getPos().getX()][(int)this.hero.getPos().getY() - 1].getPermeability()) ||
+				(order == MobileOrder.Right && this.hero.getPos().getY() < view.getWidth() / 32 - 1 && getTileMap()[(int)this.hero.getPos().getX()][(int)this.hero.getPos().getY() + 1].getPermeability())) {
 			this.hero.move(order);
 			this.tileMap[pos.x][pos.y] = model.element(' ', pos.getLocation());
 
