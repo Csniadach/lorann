@@ -20,5 +20,9 @@ public interface IController {
 	 */
 	public void orderPerform(ControllerOrder controllerOrder);
 
-	public String[][] parser(String tilemap);
+	//public String[][] parser(String tilemap);
+
+	IElement[][] getTileMap();
+
+	IElement[][] parser(String tilemap);
 }

@@ -1,65 +1,61 @@
 package model;
 
+import java.awt.*;
 import java.sql.SQLException;
+import java.util.Hashtable;
 import java.util.Observable;
 
+import contract.IElement;
 import contract.IModel;
+import model.mobile.*;
+import model.motionless.*;
 
 /**
  * The Class Model.
- *
- * @author Jean-Aymeric Diet
  */
 public class Model extends Observable implements IModel {
 
-	/** The message. */
-	private String message;
-
 	/** The map */
-	private String map;
+	private String map = "";
 
 	/**
 	 * Instantiates a new model.
 	 */
 	public Model() {
-		this.map = "";
-		this.loadMap("MAP1");
-	}
-
-
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getMessage()
-	 */
-	public String getMessage() {
-		return this.message;
+		this.loadMap("TEST");
 	}
 
 	/**
-	 * Sets the message.
-	 *
-	 * @param message
-	 *          the new message
+	 * Associate all sprite with a letter representing hin in tileMap
 	 */
-	private void setMessage(final String message) {
-		this.message = message;
-		this.setChanged();
-		this.notifyObservers();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getMessage(java.lang.String)
-	 */
-	public void loadMessage(final String key) {
-		try {
-			final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
-			this.setMessage(daoHelloWorld.find(key).getMessage());
-		} catch (final SQLException e) {
-			e.printStackTrace();
+	public IElement element(char c, Point pos) {
+		switch (c){
+			case 'B':
+				return new Bone();
+			case 'K':
+				return new CrystalBall();
+			case 'H':
+				return new HorizontalBone();
+			case 'V':
+				return new VerticalBone();
+			case 'C':
+				return new ClosedDoor();
+			case 'O':
+				return new OpenDoor();
+			case 'P':
+				return new Purse();
+			case 'L':
+				return new Hero(pos);
+			case '1':
+				return new Monster1(pos);
+			case '2':
+				return new Monster2(pos);
+			case '3':
+				return new Monster3(pos);
+			case '4':
+				return new Monster4(pos);
+			default:
+				return new Empty();
 		}
 	}
 
@@ -78,16 +74,15 @@ public class Model extends Observable implements IModel {
 	public String getMap() {
 		return this.map;
 	}
+
+
 	private void setMap(final String map) {
 		this.map = map;
 		this.setChanged();
 		this.notifyObservers();
 	}
 
-	/** get the map from the database
-	 *
-	 *  @param key
-	 * */
+
 	public void loadMap(String key) {
 		try {
 			final DAOLoadMap daoLoadMap = new DAOLoadMap(DBConnection.getInstance().getConnection());

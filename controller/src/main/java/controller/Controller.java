@@ -1,23 +1,30 @@
 package controller;
 
-import contract.ControllerOrder;
-import contract.IController;
-import contract.IModel;
-import contract.IView;
+import contract.*;
 
-import java.util.Hashtable;
+import java.awt.*;
+import java.util.Arrays;
+import java.util.Observable;
+import java.util.Observer;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Controller.
  */
-public class Controller implements IController {
+public class Controller implements IController, Observer {
 
 	/** The view. */
-	private IView		view;
+	private IView view;
+
+	private IElement[][] tileMap;
 
 	/** The model. */
-	private IModel	model;
+	private IModel model;
+
+	private IMobile hero;
+
+	public IElement[][] getTileMap() {
+		return tileMap;
+	}
 
 	/**
 	 * Instantiates a new controller.
@@ -30,16 +37,18 @@ public class Controller implements IController {
 	public Controller(final IView view, final IModel model) {
 		this.setView(view);
 		this.setModel(model);
+		this.tileMap = this.parser(this.model.getMap());
+		this.hero = (IMobile) model.element('L', new Point());
+		model.getObservable().addObserver(this);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Entry point of Controller
 	 *
-	 * @see contract.IController#control()
+	 * @see IController#control()
 	 */
 	public void control() {
-		//this.view.printMap("Appuyer sur les touches '1', '2', '3' '4' ou '5', pour charger le niveau de votre choix.");
-		this.model.loadMap("MAP1");
+		this.orderPerform(ControllerOrder.MAP1);
 	}
 
 	/**
@@ -62,31 +71,48 @@ public class Controller implements IController {
 		this.model = model;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IController#orderPerform(contract.ControllerOrder)
-	 */
 
-	/**parser function*/
-	public String[][] parser(String tilemap)
-	{
+	/**
+	 * Parse tileMap to associate a Letter to a sprite
+	 *
+	 * @param tilemap TileMap in text format (with letter)
+	 * @see contract.IController#parser(String)
+	 */
+	public IElement[][] parser(String tilemap) {
 		String[] lines = tilemap.split("\n");
 		int x = lines.length;
 		int y = lines[0].length();
-		String[][] map = new String[y][x];
-		Hashtable<Character, String> assocSprite = this.view.getAssocSprite();
+		IElement[][] map = new IElement[x][y];
+
+		for(IElement[] row: map)
+			Arrays.fill(row, this.model.element(' ', null));
+
+
 		for(int i = 0; i < x; i++)
 		{
 			for(int j = 0; j < y; j++)
 			{
-				map[j][i] = assocSprite.get(lines[i].charAt(j));
+				char c = lines[i].charAt(j);
+				Point pos = new Point(i, j);
+
+				IElement ele = this.model.element(c, pos);
+				if(c == 'L') {
+					this.hero = (IMobile) ele;
+				}
+				if (ele != null) {
+					map[i][j] = ele;
+				}
 			}
 		}
+
 		return map;
 	}
 
-	/** the loading the map in function of the map_name on the database*/
+	/**
+	 * @param controllerOrder Load map from model
+	 *
+	 * @see contract.IController#orderPerform(contract.ControllerOrder)
+	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
 		switch (controllerOrder) {
 			case MAP1:
@@ -104,13 +130,53 @@ public class Controller implements IController {
 			case MAP5:
 				this.model.loadMap("MAP5");
 				break;
-			case test:
+			case MAP6:
 				this.model.loadMap("MAP6");
 				break;
-
+			case MAP7:
+				this.model.loadMap("MAP7");
+				break;
+			case MAP8:
+				this.model.loadMap("MAP8");
+				break;
+			case MAP9:
+				this.model.loadMap("MAP9");
+				break;
+			case MOVEDOWN:
+				this.movehero(MobileOrder.Down);
+				break;
+			case MOVEUP:
+				this.movehero(MobileOrder.Up);
+				break;
+			case MOVERIGHT:
+				this.movehero(MobileOrder.Right);
+				break;
+			case MOVELEFT:
+				this.movehero(MobileOrder.Left);
+				break;
 			default:
+				this.model.loadMap("test");
 				break;
 		}
 	}
 
+	public void movehero(MobileOrder order) {
+		Point pos = this.hero.getPos();
+		if ((order == MobileOrder.Up && this.hero.getPos().getX() > 0) ||
+				(order == MobileOrder.Down && this.hero.getPos().getX() < view.getHeight() / 32 - 2) ||
+				(order == MobileOrder.Left && this.hero.getPos().getY() > 0) ||
+				(order == MobileOrder.Right && this.hero.getPos().getY() < view.getWidth() / 32 - 1)) {
+			this.hero.move(order);
+			this.tileMap[pos.x][pos.y] = model.element(' ', pos.getLocation());
+
+			pos = this.hero.getPos();
+			this.tileMap[pos.x][pos.y] = this.hero;
+		}
+		this.view.repaint();
+	}
+
+	public void update(Observable o, Object arg) {
+		this.tileMap = parser(model.getMap());
+		this.view.repaint();
+	}
 }
