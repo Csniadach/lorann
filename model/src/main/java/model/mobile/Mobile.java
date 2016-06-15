@@ -5,6 +5,9 @@ import contract.IModel;
 import contract.MobileOrder;
 import model.Element;
 
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.io.File;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -16,9 +19,9 @@ public abstract class Mobile extends Element implements IMobile {
         return pos.getLocation();
     }
 
-    private Point pos = new Point();
-    private int dx = 0;
-    private int dy = 0;
+    protected Point pos = new Point();
+
+    protected MobileOrder direction;
 
     public Mobile(String imagePath, boolean permeability, Point pos) {
         super(imagePath, permeability);
@@ -30,26 +33,43 @@ public abstract class Mobile extends Element implements IMobile {
         System.out.println("Position : " + pos);
         switch (order) {
             case Left:
-                this.pos.setLocation(
-                        this.pos.getX(),
-                        this.pos.getY() - 1);
+                if(this.direction == MobileOrder.Left) {
+                    this.pos.setLocation(
+                            this.pos.getX(),
+                            this.pos.getY() - 1);
+                } else {
+                    this.loadSprite("sprite\\lorann_l.png");
+                }
                 break;
             case Right:
-                this.pos.setLocation(
-                        this.pos.getX(),
-                        this.pos.getY() + 1);
+                if(this.direction == MobileOrder.Right) {
+                    this.pos.setLocation(
+                            this.pos.getX(),
+                            this.pos.getY() + 1);
+                } else {
+                    this.loadSprite("sprite\\lorann_r.png");
+                }
                 break;
             case Up:
-                this.pos.setLocation(
-                        this.pos.getX() - 1,
-                        this.pos.getY());
+                if(this.direction == MobileOrder.Up) {
+                    this.pos.setLocation(
+                            this.pos.getX() - 1,
+                            this.pos.getY());
+                } else {
+                    this.loadSprite("sprite\\lorann_u.png");
+                }
                 break;
             case Down:
-                this.pos.setLocation(
-                        this.pos.getX() + 1,
-                        this.pos.getY());
+                if(this.direction == MobileOrder.Down) {
+                    this.pos.setLocation(
+                            this.pos.getX() + 1,
+                            this.pos.getY());
+                } else {
+                    this.loadSprite("sprite\\lorann_b.png");
+                }
                 break;
         }
+        this.direction = order;
         System.out.println("position : " + pos);
     }
 }

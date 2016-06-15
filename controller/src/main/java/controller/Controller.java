@@ -49,6 +49,11 @@ public class Controller implements IController, Observer {
 	 */
 	public void control() {
 		this.orderPerform(ControllerOrder.MENU);
+
+		//Game Loop
+		while(true) {
+			this.view.repaint();
+		}
 	}
 
 	/**
@@ -160,10 +165,19 @@ public class Controller implements IController, Observer {
 			case MOVELEFT:
 				this.movehero(MobileOrder.Left);
 				break;
+			case FIRE:
+				this.fire();
+				break;
 			default:
 				this.model.loadMap("test");
 				break;
 		}
+	}
+
+
+	public void fire()
+	{
+
 	}
 
 	/** checking the permability and if the hero gets out of the map */

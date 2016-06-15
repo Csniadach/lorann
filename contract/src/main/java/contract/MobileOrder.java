@@ -5,5 +5,6 @@ public enum MobileOrder
     Right,
     Up,
     Left,
-    Down
+    Down,
+    Fire
 }
