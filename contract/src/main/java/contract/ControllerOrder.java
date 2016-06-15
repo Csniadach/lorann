@@ -22,6 +22,8 @@ public enum ControllerOrder {
 	MAP8,
 	MAP9,
 	test,
+	MENU,
+	WORKSHOP,
 	MOVEUP,
 	MOVEDOWN,
 	MOVELEFT,
