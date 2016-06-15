@@ -44,11 +44,11 @@ public class Controller implements IController, Observer {
 
 	/**
 	 * Entry point of Controller
-	 *
+	 *loading of the starting map
 	 * @see IController#control()
 	 */
 	public void control() {
-		this.orderPerform(ControllerOrder.MAP1);
+		this.orderPerform(ControllerOrder.MENU);
 	}
 
 	/**
@@ -141,6 +141,12 @@ public class Controller implements IController, Observer {
 				break;
 			case MAP9:
 				this.model.loadMap("MAP9");
+				break;
+			case MENU:
+				this.model.loadMap("MENU");
+				break;
+			case WORKSHOP:
+				this.model.loadMap("WORKSHOP");
 				break;
 			case MOVEDOWN:
 				this.movehero(MobileOrder.Down);
