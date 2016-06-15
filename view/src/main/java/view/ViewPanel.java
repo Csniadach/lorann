@@ -85,7 +85,7 @@ class ViewPanel extends JPanel {
 
 		if(this.tileMap != null)
 		{
-			System.out.println(Arrays.deepToString(this.tileMap));
+			//System.out.println(Arrays.deepToString(this.tileMap)); //this was to test if my tilemap was working
 			for (int i = 0; i < this.tileMap.length; i++)
 			{
 				for(int j = 0; j < this.tileMap[0].length; j++)

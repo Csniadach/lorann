@@ -7,4 +7,6 @@ public interface IMobile extends IElement
     Point getPos();
 
     void move(MobileOrder order);
+
+    MobileOrder getDirection();
 }

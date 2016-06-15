@@ -20,7 +20,7 @@ public class Controller implements IController, Observer {
 	/** The model. */
 	private IModel model;
 
-	private IMobile hero;
+	private IHero hero;
 
 	public IElement[][] getTileMap() {
 		return tileMap;
@@ -38,7 +38,7 @@ public class Controller implements IController, Observer {
 		this.setView(view);
 		this.setModel(model);
 		this.tileMap = this.parser(this.model.getMap());
-		this.hero = (IMobile) model.element('L', new Point());
+		this.hero = (IHero) model.element('L', new Point());
 		model.getObservable().addObserver(this);
 	}
 
@@ -102,7 +102,7 @@ public class Controller implements IController, Observer {
 
 				IElement ele = this.model.element(c, pos);
 				if(c == 'L') {
-					this.hero = (IMobile) ele;
+					this.hero = (IHero) ele;
 				}
 				if (ele != null) {
 					map[i][j] = ele;
@@ -184,16 +184,15 @@ public class Controller implements IController, Observer {
 
 	public void movehero(MobileOrder order) {
 		Point pos = this.hero.getPos();
-		if ((order == MobileOrder.Up && this.hero.getPos().getX() > 0 && getTileMap()[(int)this.hero.getPos().getX() - 1][(int)this.hero.getPos().getY()].getPermeability()) ||
-				(order == MobileOrder.Down && this.hero.getPos().getX() < view.getHeight() / 32 - 1 && getTileMap()[(int)this.hero.getPos().getX() + 1][(int)this.hero.getPos().getY()].getPermeability()) ||
-				(order == MobileOrder.Left && this.hero.getPos().getY() > 0 && getTileMap()[(int)this.hero.getPos().getX()][(int)this.hero.getPos().getY() - 1].getPermeability()) ||
-				(order == MobileOrder.Right && this.hero.getPos().getY() < view.getWidth() / 32 - 1 && getTileMap()[(int)this.hero.getPos().getX()][(int)this.hero.getPos().getY() + 1].getPermeability())) {
-			this.hero.move(order);
-			this.tileMap[pos.x][pos.y] = model.element(' ', pos.getLocation());
 
-			pos = this.hero.getPos();
-			this.tileMap[pos.x][pos.y] = this.hero;
-		}
+		this.hero.move(order, tileMap, this.view);
+
+		this.tileMap[pos.x][pos.y] = model.element(' ', pos.getLocation());
+
+		pos = this.hero.getPos();
+
+		this.tileMap[pos.x][pos.y] = this.hero;
+
 		this.view.repaint();
 	}
 

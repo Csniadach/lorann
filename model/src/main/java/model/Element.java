@@ -24,7 +24,7 @@ public abstract class Element implements IElement {
         this.permeability = permeability;
     }
 
-    public void loadSprite(String path) {
+    protected void loadSprite(String path) {
         try {
         this.image = ImageIO.read(new File(path));
             } catch (IOException e) {
