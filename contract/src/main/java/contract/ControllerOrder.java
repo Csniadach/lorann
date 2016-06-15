@@ -3,19 +3,27 @@ package contract;
 /**
  * The Enum ControllerOrder.
  *
- * @author Jean-Aymeric Diet
+ * @author Jean-Aymeric 
  */
 public enum ControllerOrder {
 
-	/** The English. */
-	English, /** The French. */
-	Francais, /** The Deutch. */
-	Deutsch, /** The Indonesia. */
+
+	English, 	/** old code left by jean-Aymeric DIET, legends are told that he will come and get it back someday*/
+	Francais,
+	Deutsch,
 	Indonesia,
 	MAP1,			/** i added the maps there so that you can link the key listenner and the associated functions*/
 	MAP2,
 	MAP3,
 	MAP4,
 	MAP5,
-	test
+	MAP6,
+	MAP7,
+	MAP8,
+	MAP9,
+	test,
+	MOVEUP,
+	MOVEDOWN,
+	MOVELEFT,
+	MOVERIGHT
 }
