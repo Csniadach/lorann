@@ -8,6 +8,6 @@ import java.awt.*;
 public class Monster3 extends Mobile {
     public Monster3(Point pos)
     {
-        super("monster_3.png", false, pos);
+        super("monster_3.png", true, pos);
     }
 }

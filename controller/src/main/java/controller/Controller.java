@@ -22,6 +22,8 @@ public class Controller implements IController, Observer {
 
 	private IHero hero;
 
+	private IFireball fireBall;
+
 	public IElement[][] getTileMap() {
 		return tileMap;
 	}
@@ -175,9 +177,17 @@ public class Controller implements IController, Observer {
 	}
 
 
-	public void fire()
-	{
-
+	private void fire() {
+		this.destroyFireBall();
+		MobileOrder direction = this.hero.getDirection();
+		Point currentPos = this.hero.getPos().getLocation();
+		Point nextPos = this.computeNextPos(direction, currentPos);
+		if(!currentPos.equals(nextPos)) {
+			this.fireBall = (IFireball) this.model.element('F', nextPos);
+			this.fireBall.setDirection(direction);
+			this.swapFireBall(nextPos);
+			this.view.repaint();
+		}
 	}
 
 	/** checking the permability and if the hero gets out of the map */
@@ -194,6 +204,88 @@ public class Controller implements IController, Observer {
 		this.tileMap[pos.x][pos.y] = this.hero;
 
 		this.view.repaint();
+	}
+
+	private void moveFireBall() {
+		Point currentPos = this.fireBall.getPos().getLocation();
+		this.fireBall.animate();
+		System.out.printf("DICK '%s'%n", currentPos);
+		Point nextPos = this.computeNextPos(this.fireBall.getDirection(), currentPos);
+		System.out.printf("BUTT '%s'%n", currentPos);
+
+		this.swapFireBall(nextPos);
+
+		this.tileMap[currentPos.x][currentPos.y] = model.element(' ', currentPos.getLocation());
+
+		if(this.fireBall != null && this.fireBall.getStep() > 5) {
+			this.destroyFireBall();
+		}
+	}
+
+	private void swapFireBall(Point nextPos) {
+		String nextElement = this.tileMap[nextPos.x][nextPos.y].getClass().getCanonicalName();
+		if(nextElement.contains("Monster")) {
+			this.fireBall.setLocation(nextPos);
+			this.tileMap[nextPos.x][nextPos.y] = this.fireBall;
+			this.destroyFireBall();
+		} else if(nextElement.contains("Door") ||
+				nextElement.contains("Purse") ||
+				nextElement.contains("Crystal")) {
+			this.fireBall = null;
+		}
+		else {
+			this.fireBall.setLocation(nextPos);
+			this.tileMap[nextPos.x][nextPos.y] = this.fireBall;
+		}
+	}
+
+	private Point computeNextPos(MobileOrder direction, Point currentPos) {
+		Point nextPos = currentPos.getLocation();
+		switch (direction) {
+			case Left:
+				if(currentPos.y > 0 &&
+						tileMap[currentPos.x][currentPos.y - 1].getPermeability())
+				{
+					nextPos = new Point(
+							currentPos.x,
+							currentPos.y - 1);
+				}
+				break;
+			case Right:
+				if(currentPos.y < (view.getWidth() / 32) - 1 &&
+						tileMap[currentPos.x][currentPos.y + 1].getPermeability())
+				{
+					nextPos = new Point(
+							currentPos.x,
+							currentPos.y + 1);
+				}
+				break;
+			case Up:
+				if(currentPos.x > 0 &&
+						tileMap[currentPos.x - 1][currentPos.y].getPermeability()) {
+					nextPos = new Point(
+							currentPos.x - 1,
+							currentPos.y);
+				}
+				break;
+			case Down:
+				if(currentPos.x < (view.getHeight() / 32) - 1 &&
+						tileMap[currentPos.x + 1][currentPos.y].getPermeability()) {
+					nextPos = new Point(
+							currentPos.x + 1,
+							currentPos.y);
+				}
+				break;
+		}
+		return nextPos;
+	}
+
+	private void destroyFireBall() {
+		if(this.fireBall != null) {
+			Point pos = this.fireBall.getPos().getLocation();
+			this.tileMap[pos.x][pos.y] = this.model.element(' ', pos);
+			this.fireBall = null;
+		}
 	}
 
 	public void update(Observable o, Object arg) {

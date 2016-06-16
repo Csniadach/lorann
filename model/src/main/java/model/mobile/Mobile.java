@@ -28,6 +28,10 @@ public abstract class Mobile extends Element implements IMobile {
         this.pos.setLocation(pos);
     }
 
+    public void setLocation(Point loc) {
+        this.pos.setLocation(loc);
+    }
+
     public MobileOrder getDirection() {
         return direction;
     }
