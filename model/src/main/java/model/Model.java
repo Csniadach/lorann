@@ -44,6 +44,8 @@ public class Model extends Observable implements IModel {
 				return new OpenDoor();
 			case 'P':
 				return new Purse();
+			case 'F':
+				return new FireBall(pos);
 			case 'L':
 				return new Hero(pos);
 			case '1':
