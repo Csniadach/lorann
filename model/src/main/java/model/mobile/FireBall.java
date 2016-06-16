@@ -20,7 +20,7 @@ public class FireBall extends Mobile implements IFireball {
         return step;
     }
 
-    @Override
+    //@Override
     public void setDirection(MobileOrder direction) {
         this.direction = direction;
     }

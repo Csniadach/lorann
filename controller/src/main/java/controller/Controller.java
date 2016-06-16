@@ -53,8 +53,18 @@ public class Controller implements IController, Observer {
 		this.orderPerform(ControllerOrder.MENU);
 
 		//Game Loop
-		while(true) {
+		while (true) {
+			if(this.fireBall != null) {
+				this.moveFireBall();
+			}
+
 			this.view.repaint();
+
+			try {
+				Thread.sleep(250);
+			} catch(InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
 		}
 	}
 
