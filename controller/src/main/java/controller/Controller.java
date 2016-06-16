@@ -219,9 +219,9 @@ public class Controller implements IController, Observer {
 	private void moveFireBall() {
 		Point currentPos = this.fireBall.getPos().getLocation();
 		this.fireBall.animate();
-		System.out.printf("DICK '%s'%n", currentPos);
+		//System.out.printf("Pos '%s'%n", currentPos); //this was to test the position of the fireball to see if it moved
 		Point nextPos = this.computeNextPos(this.fireBall.getDirection(), currentPos);
-		System.out.printf("BUTT '%s'%n", currentPos);
+		//System.out.printf("Pos '%s'%n", currentPos); //this was to test the position of the fireball to see if it moved
 
 		this.swapFireBall(nextPos);
 
