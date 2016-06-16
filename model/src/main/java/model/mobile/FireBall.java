@@ -31,6 +31,6 @@ public class FireBall extends Mobile implements IFireball {
             this.loadSprite(String.format("sprite\\fireball_%d.png", this.step));
         }
 
-        System.out.println(this.step);
+        //System.out.println(this.step); //this is a test for the position of the fireball
     }
 }
