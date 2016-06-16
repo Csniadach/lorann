@@ -3,9 +3,7 @@ package controller;
 import contract.*;
 
 import java.awt.*;
-import java.util.Arrays;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 /**
  * The Class Controller.
@@ -22,7 +20,17 @@ public class Controller implements IController, Observer {
 
 	private IHero hero;
 
+	private int level = 1;
+
+	private int score = 0;
+
+	private Point posDoor = null;
+
+	private HashMap<String, IMonster> monsters = new HashMap<String, IMonster>();
+
 	private IFireball fireBall;
+
+	private boolean dead = false;
 
 	public IElement[][] getTileMap() {
 		return tileMap;
@@ -58,10 +66,20 @@ public class Controller implements IController, Observer {
 				this.moveFireBall();
 			}
 
+			if(this.dead) {
+				System.out.println("DEAD");
+			}
+
+			for (Object o : this.monsters.entrySet()) {
+				Map.Entry pair = (Map.Entry) o;
+				IMonster monster = (IMonster) pair.getValue();
+				this.moveMonster(monster);
+			}
+
 			this.view.repaint();
 
 			try {
-				Thread.sleep(250);
+				Thread.sleep(300);
 			} catch(InterruptedException ex) {
 				Thread.currentThread().interrupt();
 			}
@@ -101,6 +119,9 @@ public class Controller implements IController, Observer {
 		int y = lines[0].length();
 		IElement[][] map = new IElement[x][y];
 
+		this.monsters.clear();
+		this.posDoor = null;
+
 		for(IElement[] row: map)
 			Arrays.fill(row, this.model.element(' ', null));
 
@@ -112,12 +133,20 @@ public class Controller implements IController, Observer {
 				char c = lines[i].charAt(j);
 				Point pos = new Point(i, j);
 
-				IElement ele = this.model.element(c, pos);
+				IElement element = this.model.element(c, pos);
 				if(c == 'L') {
-					this.hero = (IHero) ele;
+					this.dead = false;
+					this.hero = (IHero) element;
 				}
-				if (ele != null) {
-					map[i][j] = ele;
+				if(c == '1' || c == '2' || c == '3' || c == '4') {
+					IMonster monster = (IMonster) element;
+					this.monsters.put(monster.getClass().getSimpleName(), monster);
+				}
+				if(c == 'C') {
+					this.posDoor = pos.getLocation();
+				}
+				if (element != null) {
+					map[i][j] = element;
 				}
 			}
 		}
@@ -188,6 +217,8 @@ public class Controller implements IController, Observer {
 
 
 	private void fire() {
+		if(this.fireBall != null)
+			return;
 		this.destroyFireBall();
 		MobileOrder direction = this.hero.getDirection();
 		Point currentPos = this.hero.getPos().getLocation();
@@ -202,26 +233,44 @@ public class Controller implements IController, Observer {
 
 	/** checking the permability and if the hero gets out of the map */
 
-	public void movehero(MobileOrder order) {
+	private void movehero(MobileOrder order) {
 		Point pos = this.hero.getPos();
-
 		this.hero.move(order, tileMap, this.view);
-
 		this.tileMap[pos.x][pos.y] = model.element(' ', pos.getLocation());
 
 		pos = this.hero.getPos();
-
+		String elementName = this.tileMap[pos.x][pos.y].getClass().getSimpleName();
+		if(elementName.contains("Monster")) {
+			this.dead = true;
+		} else if (elementName.contains("Crystal") && this.posDoor != null) {
+			this.tileMap[this.posDoor.x][this.posDoor.y] = model.element('O', this.posDoor);
+		} else if (elementName.contains("OpenDoor")) {
+			this.level++;
+			this.model.loadMap(String.format("MAP%d", this.level));
+			return;
+		}
 		this.tileMap[pos.x][pos.y] = this.hero;
-
 		this.view.repaint();
 	}
 
 	private void moveFireBall() {
 		Point currentPos = this.fireBall.getPos().getLocation();
+		MobileOrder direction = this.fireBall.getDirection();
+		for (MobileOrder dir : MobileOrder.getValues()) {
+			if(!dir.equals(direction)) {
+				Point aroundPos = this.computeNextPos(dir, currentPos);
+				IElement element = this.tileMap[aroundPos.x][aroundPos.y];
+				String elementName = element.getClass().getSimpleName();
+				if(elementName.contains("Monster")) {
+					this.tileMap[aroundPos.x][aroundPos.y] = model.element(' ', aroundPos);
+					this.monsters.remove(elementName);
+					this.destroyFireBall();
+					return;
+				}
+			}
+		}
 		this.fireBall.animate();
-		//System.out.printf("Pos '%s'%n", currentPos); //this was to test the position of the fireball to see if it moved
 		Point nextPos = this.computeNextPos(this.fireBall.getDirection(), currentPos);
-		//System.out.printf("Pos '%s'%n", currentPos); //this was to test the position of the fireball to see if it moved
 
 		this.swapFireBall(nextPos);
 
@@ -233,11 +282,15 @@ public class Controller implements IController, Observer {
 	}
 
 	private void swapFireBall(Point nextPos) {
-		String nextElement = this.tileMap[nextPos.x][nextPos.y].getClass().getCanonicalName();
+		String nextElement = this.tileMap[nextPos.x][nextPos.y].getClass().getSimpleName();
 		if(nextElement.contains("Monster")) {
 			this.fireBall.setLocation(nextPos);
 			this.tileMap[nextPos.x][nextPos.y] = this.fireBall;
 			this.destroyFireBall();
+			IMonster monster = this.monsters.get(nextElement);
+			Point monsterPos = monster.getPos().getLocation();
+			this.tileMap[monsterPos.x][monsterPos.y] = model.element(' ', monsterPos);
+			this.monsters.remove(nextElement);
 		} else if(nextElement.contains("Door") ||
 				nextElement.contains("Purse") ||
 				nextElement.contains("Crystal")) {
@@ -251,6 +304,10 @@ public class Controller implements IController, Observer {
 
 	private Point computeNextPos(MobileOrder direction, Point currentPos) {
 		Point nextPos = currentPos.getLocation();
+
+		if(direction == null)
+			return nextPos;
+
 		switch (direction) {
 			case Left:
 				if(currentPos.y > 0 &&
@@ -301,5 +358,28 @@ public class Controller implements IController, Observer {
 	public void update(Observable o, Object arg) {
 		this.tileMap = parser(model.getMap());
 		this.view.repaint();
+	}
+
+	private void moveMonster(IMonster monster) {
+		Point pos = monster.getPos().getLocation();
+		Point nextPos = this.computeNextPos(
+				monster.getDirection(
+						this.hero.getPos().getLocation(),
+						this.tileMap),
+				pos);
+		if(nextPos != pos) {
+			String element = tileMap[nextPos.x][nextPos.y].getClass()
+					.getSimpleName();
+			if(element.contains("Hero")) {
+				this.dead = true;
+			} else if(!element.contains("Monster") &&
+					!element.contains("Purse") &&
+					!element.contains("Crystal") &&
+					!element.contains("Door")) {
+				tileMap[pos.x][pos.y] = model.element(' ', pos.getLocation());
+				monster.setLocation(nextPos);
+				tileMap[nextPos.x][nextPos.y] = monster;
+			}
+		}
 	}
 }
