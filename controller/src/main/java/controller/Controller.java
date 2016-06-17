@@ -20,6 +20,8 @@ public class Controller implements IController, Observer {
 
 	private IHero hero;
 
+	private String pseudo;
+
 	private int level = 1;
 
 	private int score = 0;
@@ -34,6 +36,14 @@ public class Controller implements IController, Observer {
 
 	public IElement[][] getTileMap() {
 		return tileMap;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public int getScore() {
+		return score;
 	}
 
 	/**
@@ -58,16 +68,22 @@ public class Controller implements IController, Observer {
 	 * @see IController#control()
 	 */
 	public void control() {
+		this.pseudo = this.view.getPseudo();
+		//System.out.println(this.pseudo); test of the entered pseudo
 		this.orderPerform(ControllerOrder.MENU);
 
-		//Game Loop
+		// Game Loop
 		while (true) {
 			if(this.fireBall != null) {
 				this.moveFireBall();
 			}
 
 			if(this.dead) {
-				System.out.println("DEAD");
+				this.model.loadMap("MAP1");
+				this.view.printMessage(String.format("YOU DIED! You made a score of : %d\nPress OK to restart the game", this.score));
+				this.model.upNameAndScore(this.score, this.pseudo);
+				this.level = 1;
+				this.score = 0;
 			}
 
 			for (Object o : this.monsters.entrySet()) {
@@ -79,7 +95,7 @@ public class Controller implements IController, Observer {
 			this.view.repaint();
 
 			try {
-				Thread.sleep(300);
+				Thread.sleep(250);
 			} catch(InterruptedException ex) {
 				Thread.currentThread().interrupt();
 			}
@@ -160,6 +176,10 @@ public class Controller implements IController, Observer {
 	 * @see contract.IController#orderPerform(contract.ControllerOrder)
 	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
+
+		if (controllerOrder == null)
+			return;
+
 		switch (controllerOrder) {
 			case MAP1:
 				this.model.loadMap("MAP1");
@@ -244,10 +264,19 @@ public class Controller implements IController, Observer {
 			this.dead = true;
 		} else if (elementName.contains("Crystal") && this.posDoor != null) {
 			this.tileMap[this.posDoor.x][this.posDoor.y] = model.element('O', this.posDoor);
+			this.score += 100;
 		} else if (elementName.contains("OpenDoor")) {
 			this.level++;
+			if(this.level > 9) {
+				this.model.upNameAndScore(this.score, this.pseudo);
+				this.view.printMessage(String.format("WELL DONE %s! Your score is : %d\nPress OK to restart the game", this.pseudo, this.score));
+				this.score = 0;
+				this.level = 1;
+			}
 			this.model.loadMap(String.format("MAP%d", this.level));
 			return;
+		} else if (elementName.contains("Purse")) {
+			this.score += 250;
 		}
 		this.tileMap[pos.x][pos.y] = this.hero;
 		this.view.repaint();

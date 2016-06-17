@@ -20,7 +20,8 @@ public interface IController {
 	 */
 	public void orderPerform(ControllerOrder controllerOrder);
 
-
+	int getScore();
+	int getLevel();
 
 	IElement[][] getTileMap();
 

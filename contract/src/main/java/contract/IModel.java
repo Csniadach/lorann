@@ -34,5 +34,9 @@ public interface IModel {
 	 */
 	void loadMap(String key);
 
+	String[][] getHighScore();
+
+	void upNameAndScore(final int score, final String nickname);
+
 	IElement element(char c, Point pos);
 }
