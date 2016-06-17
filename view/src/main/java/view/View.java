@@ -31,6 +31,16 @@ public class View implements IView, Runnable {
 		SwingUtilities.invokeLater(this);
 	}
 
+	public int getHeight()
+	{
+		return this.viewFrame.getHeight();
+	}
+
+	public int getWidth()
+	{
+		return this.viewFrame.getWidth();
+	}
+
 	/**
 	 * CrystalBall code to controller order.
 	 *
@@ -88,6 +98,10 @@ public class View implements IView, Runnable {
 		this.viewFrame.printMessage(message);
 	}
 
+	public String getPseudo() {
+		return this.viewFrame.pseudo();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -109,15 +123,5 @@ public class View implements IView, Runnable {
 	 */
 	public void setController(final IController controller) {
 		this.viewFrame.setController(controller);
-	}
-
-
-	public int getHeight()
-	{
-		return this.viewFrame.getHeight();
-	}
-	public int getWidth()
-	{
-		return this.viewFrame.getWidth();
 	}
 }

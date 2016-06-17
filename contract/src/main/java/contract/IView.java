@@ -16,4 +16,7 @@ public interface IView {
 
 	int getHeight();
 	int getWidth();
+
+	String getPseudo();
+	void printMessage(final String message);
 }

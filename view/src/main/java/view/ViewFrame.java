@@ -192,4 +192,8 @@ class ViewFrame extends JFrame implements KeyListener {
 	public void keyReleased(final KeyEvent e) {
 
 	}
+
+	public String pseudo() {
+		return JOptionPane.showInputDialog("Pseudo");
+	}
 }

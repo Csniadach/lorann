@@ -4,6 +4,8 @@ import contract.IElement;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.sql.Array;
+import java.sql.SQLException;
 import java.util.Arrays;
 import javax.swing.JPanel;
 
@@ -69,8 +71,8 @@ class ViewPanel extends JPanel {
 	 */
 	public void setSize(int width, int height) {
 		super.setSize((width*32) + this.getInsets().left + this.getInsets().right,
-				(height*32) + this.getInsets().top + this.getInsets().bottom);
-		this.viewFrame.setSize(width*32, height*32);
+				(height*32) + this.getInsets().top + this.getInsets().bottom + 40);
+		this.viewFrame.setSize(width*32, height*32 + 40);
 	}
 
 	/*
@@ -82,10 +84,16 @@ class ViewPanel extends JPanel {
 	protected void paintComponent(final Graphics graphics) {
 		graphics.setColor(Color.black);
 		graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
+		graphics.setColor(Color.yellow);
+		graphics.setFont(new Font(null, Font.BOLD, 20));
+
+		int scoreIndex = 0;
+
+		String[][] scores = this.viewFrame.getModel().getHighScore();
+		//System.out.println(Arrays.deepToString(scores)); //test to recover the score from the database
 
 		if(this.tileMap != null)
 		{
-			//System.out.println(Arrays.deepToString(this.tileMap)); //this was to test if my tilemap was working
 			for (int i = 0; i < this.tileMap.length; i++)
 			{
 				for(int j = 0; j < this.tileMap[0].length; j++)
@@ -93,9 +101,22 @@ class ViewPanel extends JPanel {
 					BufferedImage image = tileMap[i][j].getImage();
 					if(image != null)
 						graphics.drawImage(image, j*32, i*32, null);
+					else if(tileMap[i][j].getClass().getSimpleName().contains("Title")) {
+						graphics.drawString("HIGHSCORE", j*32, i*32 + 20);
+					} else if(tileMap[i][j].getClass().getSimpleName().contains("Score")) {
+						if(scoreIndex < scores[0].length) {
+							graphics.drawString(
+									String.format("%s %s",
+											scores[0][scoreIndex],
+											scores[1][scoreIndex]), j*32 + 5, i*32 + 20);
+							scoreIndex++;
+						}
+					}
 				}
 			}
 		}
-
+		graphics.drawString(String.format("SCORE : %d    LEVEL : %d",
+				this.viewFrame.getController().getScore(),
+				this.viewFrame.getController().getLevel()), 10, this.getHeight() - 20);
 	}
 }
