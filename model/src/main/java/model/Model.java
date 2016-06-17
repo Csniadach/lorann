@@ -18,11 +18,13 @@ public class Model extends Observable implements IModel {
 	/** The map */
 	private String map = "";
 
+	/** The score */
+	private int score = 0;
+
 	/**
 	 * Instantiates a new model.
 	 */
 	public Model() {
-		this.loadMap("MENU");
 	}
 
 	/**
@@ -44,10 +46,10 @@ public class Model extends Observable implements IModel {
 				return new OpenDoor();
 			case 'P':
 				return new Purse();
-			case 'F':
-				return new FireBall(pos);
 			case 'L':
 				return new Hero(pos);
+			case 'F':
+				return new FireBall(pos);
 			case '1':
 				return new Monster1(pos);
 			case '2':
@@ -56,6 +58,10 @@ public class Model extends Observable implements IModel {
 				return new Monster3(pos);
 			case '4':
 				return new Monster4(pos);
+			case 'T':
+				return new Title();
+			case 'S':
+				return new Score();
 			default:
 				return new Empty();
 		}
@@ -92,5 +98,41 @@ public class Model extends Observable implements IModel {
 		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void upNameAndScore(final int score, final String nickname)
+	{
+		try
+		{
+			final DAOUploadScore daoUploadScore = new DAOUploadScore(DBConnection.getInstance().getConnection());
+			daoUploadScore.upNameAndScore(score, nickname);
+		}
+		catch (final SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public void setGetHighScore(final int score)
+	{
+		this.score = score;
+	}
+
+	public int getGetHighScore()
+	{
+		return this.score;
+	}
+
+	public String[][] getHighScore()
+	{
+		try {
+			final DAOGetHighscore daoGetHighscore = new DAOGetHighscore(DBConnection.getInstance().getConnection());
+			return (daoGetHighscore.getHighScore());
+		}
+		catch (final SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
