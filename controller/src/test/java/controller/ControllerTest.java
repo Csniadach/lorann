@@ -27,4 +27,29 @@ public class ControllerTest {
     public void testOrderPerform() throws Exception {
 
     }
+
+    @Test
+    public void testGetTileMap() throws Exception {
+
+    }
+
+    @Test
+    public void testGetLevel() throws Exception {
+
+    }
+
+    @Test
+    public void testGetScore() throws Exception {
+
+    }
+
+    @Test
+    public void testParser() throws Exception {
+
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+
+    }
 }
