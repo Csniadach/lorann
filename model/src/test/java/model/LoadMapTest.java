@@ -10,6 +10,9 @@ import static org.junit.Assert.*;
 
 public class LoadMapTest {
 
+    /**
+     * declaration of the model
+     */
     private IModel model;
 
     /**
@@ -20,6 +23,9 @@ public class LoadMapTest {
      */
     @Before
     public void setUp() throws Exception {
+        /**
+         * init of the model
+         */
     this.model = new Model();
     }
 

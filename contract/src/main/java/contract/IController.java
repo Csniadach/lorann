@@ -1,5 +1,7 @@
 package contract;
 
+import java.awt.*;
+
 /**
  * The Interface IController.
  *
@@ -49,4 +51,13 @@ public interface IController {
 	 * @return IElement[][]
      */
 	IElement[][] parser(String tilemap);
+
+	/**the next position
+	 *
+	 * @param direction
+	 * @param currentPos
+     * @return
+     */
+	Point computeNextPos(MobileOrder direction, Point currentPos);
+
 }

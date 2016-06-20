@@ -391,7 +391,7 @@ public class Controller implements IController, Observer {
 	 * @param currentPos
      * @return
      */
-	private Point computeNextPos(MobileOrder direction, Point currentPos) {
+	public Point computeNextPos(MobileOrder direction, Point currentPos) {
 		Point nextPos = currentPos.getLocation();
 
 		if(direction == null)
