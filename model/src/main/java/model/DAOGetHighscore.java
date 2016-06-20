@@ -4,14 +4,14 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * The Class DAOLoadMap.
+ * The Class DAOGetHighscore.
  *
  * @author Cyril SNIADACH
  */
 class DAOGetHighscore extends DAOEntityScore<GetHighscore> {
 
     /**
-     * Instantiates a new DAO Load Map.
+     * Instantiates a new DAO Get Highscore.
      *
      * @param connection
      *          the connection
@@ -78,8 +78,7 @@ class DAOGetHighscore extends DAOEntityScore<GetHighscore> {
                 aScores.add(rs.getString("score"));
                 aNicknames.add(rs.getString("nickname"));
             }
-            //System.out.println("NICKNAME SIZE !!!!! DEBUG DEBUG DEBUG DEBUG DEBUG " + aNicknames.size() + " DEBUG DEBUG DEBUG DEBUG DEBUG ");
-            //System.out.println("SCORE SIZE !!!!! DEBUG DEBUG DEBUG DEBUG DEBUG " + aScores.size() + " DEBUG DEBUG DEBUG DEBUG DEBUG ");
+
             stringHighScore[0] = new String[aNicknames.size()];
             stringHighScore[1] = new String[aScores.size()];
             stringHighScore[0] = aNicknames.toArray(stringHighScore[0]);
