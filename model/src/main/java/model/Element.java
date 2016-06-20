@@ -19,14 +19,17 @@ public abstract class Element implements IElement {
     public Element(String path, boolean permeability)
     {
         if(!path.equals("")) {
-            this.loadSprite(String.format("sprite\\%s", path));
+            this.loadSprite(path);
         }
         this.permeability = permeability;
     }
 
     protected void loadSprite(String path) {
+        String.format("Working Directory = /sprite/%s", path);
+        if(path == null)
+            return;
         try {
-        this.image = ImageIO.read(new File(path));
+            this.image = ImageIO.read(getClass().getResource(String.format("/sprite/%s", path)));
             } catch (IOException e) {
             e.printStackTrace();
 

@@ -28,7 +28,7 @@ public class FireBall extends Mobile implements IFireball {
     public void animate() {
         this.step++;
         if(this.step > 0 && this.step < 6) {
-            this.loadSprite(String.format("sprite\\fireball_%d.png", this.step));
+            this.loadSprite(String.format("fireball_%d.png", this.step));
         }
 
         //System.out.println(this.step); //this is a test for the position of the fireball
