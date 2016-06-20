@@ -13,7 +13,6 @@ import contract.IView;
 /**
  * The Class View.
  *
- * @author Jean-Aymeric Diet
  */
 public class View implements IView, Runnable {
 
@@ -31,18 +30,28 @@ public class View implements IView, Runnable {
 		SwingUtilities.invokeLater(this);
 	}
 
+	/**
+	 * get the height
+	 *
+	 * @return height
+     */
 	public int getHeight()
 	{
 		return this.viewFrame.getHeight();
 	}
 
+	/**
+	 * get the width
+	 *
+	 * @return width
+     */
 	public int getWidth()
 	{
 		return this.viewFrame.getWidth();
 	}
 
 	/**
-	 * CrystalBall code to controller order.
+	 *  code from the keylistenner to the controller order.
 	 *
 	 * @param keyCode
 	 *          the key code
@@ -98,6 +107,11 @@ public class View implements IView, Runnable {
 		this.viewFrame.printMessage(message);
 	}
 
+	/**
+	 * get the pseudo
+	 *
+	 * @return pseudo
+     */
 	public String getPseudo() {
 		return this.viewFrame.pseudo();
 	}
@@ -111,6 +125,10 @@ public class View implements IView, Runnable {
 		this.viewFrame.setVisible(true);
 	}
 
+	/**
+	 * refresh the view
+	 *
+	 */
 	public void repaint(){
 		this.viewFrame.update();
 	}
