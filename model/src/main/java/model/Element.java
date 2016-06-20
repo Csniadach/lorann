@@ -13,9 +13,23 @@ import java.io.IOException;
  * Created by SNIADACH Cyril
  */
 public abstract class Element implements IElement {
+
+    /**
+     * the image
+     */
     protected BufferedImage image = null;
+
+    /**
+     * the permability
+     */
     protected boolean     permeability;
 
+    /**
+     * the Element
+     *
+     * @param path
+     * @param permeability
+     */
     public Element(String path, boolean permeability)
     {
         if(!path.equals("")) {
@@ -24,6 +38,11 @@ public abstract class Element implements IElement {
         this.permeability = permeability;
     }
 
+    /**
+     * load the sprite from the good path
+     *
+     * @param path
+     */
     protected void loadSprite(String path) {
         String.format("Working Directory = /sprite/%s", path);
         if(path == null)
@@ -36,11 +55,21 @@ public abstract class Element implements IElement {
             }
         }
 
+    /**
+     * get the image
+     *
+     * @return image
+     */
     public BufferedImage getImage()
     {
         return this.image;
     }
 
+    /**
+     * get the permability
+     *
+     * @return permability
+     */
     public boolean getPermeability()
     {
         return permeability;

@@ -21,6 +21,9 @@ class ViewPanel extends JPanel {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -998294702363713521L;
 
+	/**
+	 * the tilemap
+	 */
 	private IElement[][] tileMap;
 
 	/**
@@ -75,8 +78,8 @@ class ViewPanel extends JPanel {
 		this.viewFrame.setSize(width*32, height*32 + 40);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * the component that print everything to the screen
 	 *
 	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
 	 */

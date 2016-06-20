@@ -11,10 +11,23 @@ import java.awt.*;
  * Created by SNIADACH Cyril
  */
 public class Hero extends Mobile implements IHero {
+
+    /**
+     * init the hero
+     *
+     * @param pos
+     */
     public Hero(Point pos) {
         super("lorann_b.png", true, pos);
     }
 
+    /**
+     * the movements of the hero
+     *
+     * @param order
+     * @param tileMap
+     * @param view
+     */
     public void move(MobileOrder order, IElement[][] tileMap, IView view)
     {
         switch (order) {

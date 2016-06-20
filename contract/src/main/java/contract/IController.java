@@ -20,10 +20,33 @@ public interface IController {
 	 */
 	public void orderPerform(ControllerOrder controllerOrder);
 
+	/**
+	 * Get score
+	 *
+	 *@return score
+     */
 	int getScore();
+
+	/**
+	 * Get level
+	 *
+	 * @return level
+     */
 	int getLevel();
 
+	/**
+	 * Get tilemap
+	 *
+	 * @return tilemap[][]
+     */
 	IElement[][] getTileMap();
 
+	/**
+	 * Parse the map text
+	 *
+	 *
+	 * @param tilemap
+	 * @return IElement[][]
+     */
 	IElement[][] parser(String tilemap);
 }

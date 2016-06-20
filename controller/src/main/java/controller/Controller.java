@@ -13,35 +13,77 @@ public class Controller implements IController, Observer {
 	/** The view. */
 	private IView view;
 
+	/**
+	 * The tilemap
+	 */
 	private IElement[][] tileMap;
 
 	/** The model. */
 	private IModel model;
 
+	/**
+	 * the hero
+	 */
 	private IHero hero;
 
+	/**
+	 * the pseudo
+	 */
 	private String pseudo;
 
+	/**
+	 * the level
+	 */
 	private int level = 1;
 
+	/**
+	 * the score
+	 */
 	private int score = 0;
 
+	/**
+	 * the door position
+	 */
 	private Point posDoor = null;
 
+	/**
+	 * the list of the alive monsters in real time
+	 */
 	private HashMap<String, IMonster> monsters = new HashMap<String, IMonster>();
 
+	/**
+	 * the fireball
+	 */
 	private IFireball fireBall;
 
+	/**
+	 * dead or not
+	 */
 	private boolean dead = false;
 
+	/**
+	 * Get the tilemap
+	 *
+	 * @return tilemap
+     */
 	public IElement[][] getTileMap() {
 		return tileMap;
 	}
 
+	/**
+	 * Get the level
+	 *
+	 * @return level
+     */
 	public int getLevel() {
 		return level;
 	}
 
+	/**
+	 * Get the score
+	 *
+	 * @return score
+     */
 	public int getScore() {
 		return score;
 	}
@@ -64,7 +106,7 @@ public class Controller implements IController, Observer {
 
 	/**
 	 * Entry point of Controller
-	 *loading of the starting map
+	 *loading of the starting map and game loop that will refresh the view
 	 * @see IController#control()
 	 */
 	public void control() {
@@ -236,6 +278,9 @@ public class Controller implements IController, Observer {
 	}
 
 
+	/**
+	 * the action of shooting a fireball
+	 */
 	private void fire() {
 		if(this.fireBall != null)
 			return;
@@ -251,7 +296,7 @@ public class Controller implements IController, Observer {
 		}
 	}
 
-	/** checking the permability and if the hero gets out of the map */
+	/** checking the permability and if the hero gets out of the map and if the hero grabs a key and if the hero dies if he passes an open door, if he gabs a purse, etc...*/
 
 	private void movehero(MobileOrder order) {
 		Point pos = this.hero.getPos();
@@ -282,6 +327,9 @@ public class Controller implements IController, Observer {
 		this.view.repaint();
 	}
 
+	/**
+	 * the movement of the fireball, and check if it touches a monster
+	 */
 	private void moveFireBall() {
 		Point currentPos = this.fireBall.getPos().getLocation();
 		MobileOrder direction = this.fireBall.getDirection();
@@ -310,6 +358,11 @@ public class Controller implements IController, Observer {
 		}
 	}
 
+	/**
+	 * the next step of the fireball
+	 *
+	 * @param nextPos
+     */
 	private void swapFireBall(Point nextPos) {
 		String nextElement = this.tileMap[nextPos.x][nextPos.y].getClass().getSimpleName();
 		if(nextElement.contains("Monster")) {
@@ -331,6 +384,13 @@ public class Controller implements IController, Observer {
 		}
 	}
 
+	/**
+	 * get the next position of the fireball
+	 *
+	 * @param direction
+	 * @param currentPos
+     * @return
+     */
 	private Point computeNextPos(MobileOrder direction, Point currentPos) {
 		Point nextPos = currentPos.getLocation();
 
@@ -376,6 +436,10 @@ public class Controller implements IController, Observer {
 		return nextPos;
 	}
 
+	/**
+	 * destroy the fireball
+	 *
+	 */
 	private void destroyFireBall() {
 		if(this.fireBall != null) {
 			Point pos = this.fireBall.getPos().getLocation();
@@ -384,11 +448,22 @@ public class Controller implements IController, Observer {
 		}
 	}
 
+	/**
+	 * update the view
+	 *
+	 * @param o
+	 * @param arg
+     */
 	public void update(Observable o, Object arg) {
 		this.tileMap = parser(model.getMap());
 		this.view.repaint();
 	}
 
+	/**
+	 * the movement of the monster + it's permability
+	 *
+	 * @param monster
+     */
 	private void moveMonster(IMonster monster) {
 		Point pos = monster.getPos().getLocation();
 		Point nextPos = this.computeNextPos(

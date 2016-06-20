@@ -28,7 +28,7 @@ public class Model extends Observable implements IModel {
 	}
 
 	/**
-	 * Associate all sprite with a letter representing hin in tileMap
+	 * Associate all sprite with a letter representing it in the tileMap
 	 */
 	public IElement element(char c, Point pos) {
 		switch (c){
@@ -77,13 +77,23 @@ public class Model extends Observable implements IModel {
 	}
 
 
-	/** i added the map functions in general here*/
+	/* i added the map functions in general here*/
 
+	/**
+	 * get the map
+	 *
+	 * @return map
+     */
 	public String getMap() {
 		return this.map;
 	}
 
 
+	/**
+	 * set the map
+	 *
+	 * @param map
+     */
 	private void setMap(final String map) {
 		this.map = map;
 		this.setChanged();
@@ -91,6 +101,11 @@ public class Model extends Observable implements IModel {
 	}
 
 
+	/**
+	 * load the map from the db
+	 *
+	 * @param key
+     */
 	public void loadMap(String key) {
 		try {
 			final DAOLoadMap daoLoadMap = new DAOLoadMap(DBConnection.getInstance().getConnection());
@@ -100,6 +115,12 @@ public class Model extends Observable implements IModel {
 		}
 	}
 
+	/**
+	 * upload the name and score to the db
+	 *
+	 * @param score
+	 * @param nickname
+     */
 	public void upNameAndScore(final int score, final String nickname)
 	{
 		try
@@ -123,6 +144,11 @@ public class Model extends Observable implements IModel {
 		return this.score;
 	}
 
+	/**
+	 * get the highscores from the db
+	 *
+	 * @return highscore[][]
+     */
 	public String[][] getHighScore()
 	{
 		try {
