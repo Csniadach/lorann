@@ -25,6 +25,9 @@ class ViewFrame extends JFrame implements KeyListener {
 	private IController controller;
 
 
+	/**
+	 * the view panel
+	 */
 	private ViewPanel viewPanel;
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -697358409737458175L;
@@ -139,6 +142,9 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setLocationRelativeTo(null);
 	}
 
+	/**
+	 * refresh the view
+	 */
 	public void update() {
 		this.viewPanel.update(
 				this.controller.getTileMap()
@@ -193,6 +199,11 @@ class ViewFrame extends JFrame implements KeyListener {
 
 	}
 
+	/**
+	 * get the result of the text typed in the dialog popup
+	 *
+	 * @return pseudo
+     */
 	public String pseudo() {
 		return JOptionPane.showInputDialog("Pseudo");
 	}
