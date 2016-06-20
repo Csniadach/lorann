@@ -10,12 +10,23 @@ import java.awt.*;
  * Created by SNIADACH Cyril
  */
 public class Monster1 extends Mobile implements IMonster {
+    /**
+     * init of the monster1
+     *
+     * @param pos
+     */
     public Monster1(Point pos)
     {
         super("monster_1.png", true, pos);
     }
 
-
+    /**
+     * get the direction and perform a random move, except if the hero is on the same line, in this case, he'll rush towards it
+     *
+     * @param heroPos
+     * @param tileMap
+     * @return
+     */
     public MobileOrder getDirection(Point heroPos, IElement[][] tileMap) {
         Point pos = this.getPos().getLocation();
 

@@ -6,14 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * The Class DAOLoadMap.
+ * The Class DAOUploadScore.
  *
  * @author Cyril SNIADACH
  */
 class DAOUploadScore extends DAOEntityScore<UploadScore> {
 
     /**
-     * Instantiates a new DAO Load Map.
+     * Instantiates a new DAO Upload Score.
      *
      * @param connection
      *          the connection

@@ -7,6 +7,9 @@ package model;
  */
 class GetHighscore extends EntityScore {
 
+    /**
+     * init the score
+     */
     private int	score;
     /**
      * Instantiates a new Get Highscore.
