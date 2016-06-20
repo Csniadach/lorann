@@ -27,7 +27,7 @@ public class Hero extends Mobile implements IHero {
                             this.pos.getX(),
                             this.pos.getY() - 1);
                 } else {
-                    this.loadSprite("sprite\\lorann_l.png");
+                    this.loadSprite("lorann_l.png");
                 }
                 break;
             case Right:
@@ -39,7 +39,7 @@ public class Hero extends Mobile implements IHero {
                             this.pos.getX(),
                             this.pos.getY() + 1);
                 } else {
-                    this.loadSprite("sprite\\lorann_r.png");
+                    this.loadSprite("lorann_r.png");
                 }
                 break;
             case Up:
@@ -50,7 +50,7 @@ public class Hero extends Mobile implements IHero {
                             this.pos.getX() - 1,
                             this.pos.getY());
                 } else {
-                    this.loadSprite("sprite\\lorann_u.png");
+                    this.loadSprite("lorann_u.png");
                 }
                 break;
             case Down:
@@ -61,7 +61,7 @@ public class Hero extends Mobile implements IHero {
                             this.pos.getX() + 1,
                             this.pos.getY());
                 } else {
-                    this.loadSprite("sprite\\lorann_b.png");
+                    this.loadSprite("lorann_b.png");
                 }
                 break;
         }

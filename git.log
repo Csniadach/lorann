@@ -1,0 +1,192 @@
+commit 237a665d4efa5a7aadc95a53f45ab7a1b4c74387
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Fri Jun 17 15:24:37 2016 +0200
+
+    read me fix
+    
+    translated and fixxed the read me because it was upsetting, i mean
+    seriousy ? "Jave" pff
+
+commit e9d1717cd63846dc39a00f1038370dbc853ac265
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Fri Jun 17 15:21:17 2016 +0200
+
+    up the databse creation script
+    
+    i fixed some SQL queries
+
+commit be592c766143c63f991291be00ccaf4f09ff80ff
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Fri Jun 17 15:19:29 2016 +0200
+
+    score fix with database
+    
+    fix because git bugged :s
+
+commit eaccdbe9be0d59d105cff3e65865a328a42f3cfb
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Fri Jun 17 15:19:02 2016 +0200
+
+    score working with database
+    
+    the score display and comunication with the database is working
+
+commit 8ce93c5f29f68f70b6f8fb1b7fa0e1ad53d167a9
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Thu Jun 16 16:02:41 2016 +0200
+
+    monster movements + destroy + death
+    
+    state of death is declared, the monsters move randomly, and they
+    disapear when hit by a fireball
+
+commit cbb2e8ab6ef7d5b4b9b1b69408d5e6e64fbf9a51
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Thu Jun 16 09:28:20 2016 +0200
+
+    comments added
+    
+    added some comments
+
+commit e8540c0972f46f3ad09bf81ed45a1ef14901a501
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Thu Jun 16 09:21:37 2016 +0200
+
+    fireball working
+    
+    yeah :D
+
+commit dcc88481f4813650c624b9715a0a30a6a61f1d7c
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Thu Jun 16 09:15:14 2016 +0200
+
+    fireball almost working
+    
+    fireball just go 1 case any further at the moment :/
+
+commit 70bd6e5fba623f0302cfd69e32d6a7e1b1501b58
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Wed Jun 15 15:19:43 2016 +0200
+
+    animations fix
+    
+    fix for all anims for hero
+
+commit f4bfb38051f0e8455bbf8218b070d96a919ae8c9
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Wed Jun 15 14:36:19 2016 +0200
+
+    added animations for lorann
+    
+    animations left up down and right added to lorann
+
+commit 3d85c055b82b38c403460c6482f6bf1e931c5059
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Wed Jun 15 11:49:59 2016 +0200
+
+    adding maps + database creation script
+    
+    9 maps are available, + a menu map, the workshop map and a test map
+
+commit ec1429a11815cb34d844cec97615588994f81616
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Wed Jun 15 11:09:03 2016 +0200
+
+    permability added
+    
+    permability added
+
+commit ff6af11d5162fb6fdd9155586ac7826a45987767
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Wed Jun 15 11:02:26 2016 +0200
+
+    movements working !!!
+    
+    ouh yeah !!
+
+commit e95ea424ae236b4bd02ce0955266d51b05cfe1cb
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Tue Jun 14 16:53:46 2016 +0200
+
+    movements in progress
+    
+    adding permability and movements stuff - work in progress
+
+commit 245abb672766e5b45d6371425984759aca417063
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Tue Jun 14 16:17:06 2016 +0200
+
+    git problems and stuff
+
+commit b6a26cc8bf96891dbeeff05972815307c4596d35
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Tue Jun 14 10:38:06 2016 +0200
+
+    little fix + comments
+    
+    fixed the keylistenner for the numpad to work and added comments
+
+commit c44e43f5a0c749b547802ec321b57dda6a8ea10b
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Mon Jun 13 21:42:46 2016 +0200
+
+    map displaying correctly
+    
+    The map now display correctly with the sprites and in a dynamic way ! :)
+
+commit 15ab3ef07057f879bb6de1bcf35bd738edca4f96
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Mon Jun 13 14:06:33 2016 +0200
+
+    added the parser
+    
+    added a parser
+
+commit ab8f436542c00db46a9e0e82dd4075ec905f4b00
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Mon Jun 13 11:42:25 2016 +0200
+
+    put the news tests
+    
+    i did the new tests in model
+
+commit 30ea78cf53146abae1f4c6b03921665e013d0e81
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Mon Jun 13 11:24:04 2016 +0200
+
+    getting the map from the database
+    
+    getting the map from the database is finally working !! :D
+
+commit b690d38103a86e4f45e18e5ac96c6457c166e256
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Sat Jun 11 19:15:54 2016 +0200
+
+    sprites added
+    
+    sprites added, may be subject to change later, we'll see
+
+commit 15f475d4d2656a85a8c747f59f403890444605e0
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Sat Jun 11 18:48:42 2016 +0200
+
+    All tests running and passing
+    
+    All the tests of the project are green
+
+commit efbd086a21b743c11fa73b8a304cbac119222e3a
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Sat Jun 11 15:55:16 2016 +0200
+
+    read me update
+    
+    updated the readme file to explain how to get started with the database
+
+commit f1c26064437fcf22fb46089dfe06a10fe1f275b8
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Sat Jun 11 15:44:55 2016 +0200
+
+    1st commit
+    
+    this is the first commit with the core base programm working (the hello
+    worlds through mysql in differents languages)
