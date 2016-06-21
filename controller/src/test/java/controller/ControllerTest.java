@@ -60,7 +60,7 @@ public class ControllerTest {
                         "BHHHHHHHHHHHHHHHHHHB",
                 this.model.getMap());
     }
-   
+
     /**
      * test of the parser
      *

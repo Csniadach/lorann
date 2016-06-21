@@ -1,3 +1,52 @@
+commit d252c508f818bbce0dd6e49dc034a359d4f9ea28
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Mon Jun 20 17:03:53 2016 +0200
+
+    loadMapTest and controllerTest working
+    
+    loadmapTest and controllerTest working
+
+commit 3cbf6d6a34d7a6be1ae88604850dba8e949e23bf
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Mon Jun 20 14:08:02 2016 +0200
+
+    test
+    
+    unit test thing
+
+commit 5f0a58670197c1f8e9af244db2bbf8ee63ff518c
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Mon Jun 20 11:23:59 2016 +0200
+
+    comments model
+    
+    finished to comment the model
+
+commit 2a1c26a2185b1f00463590931abb4411b69d317e
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Mon Jun 20 10:59:41 2016 +0200
+
+    comments +
+    
+    more comments to the view
+
+commit 971ae17e5bac81f323e7f3b5b4a2cf7d7fa27aba
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Mon Jun 20 10:59:22 2016 +0200
+
+    added comments
+    
+    added comments to the interfaces, the view and the controller
+
+commit 8b13063b7fb86de2a17bb42cc963e6f40cd924bf
+Author: Csniadach <cyril.sniadach@viacesi.fr>
+Date:   Mon Jun 20 10:03:49 2016 +0200
+
+    git log not up to date + sprites changes
+    
+    changed the sprites access to make it work in a standalone way + added
+    the git log that is NOT up to date
+
 commit 237a665d4efa5a7aadc95a53f45ab7a1b4c74387
 Author: Csniadach <cyril.sniadach@viacesi.fr>
 Date:   Fri Jun 17 15:24:37 2016 +0200
