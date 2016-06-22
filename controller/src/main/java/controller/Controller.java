@@ -381,6 +381,7 @@ public class Controller implements IController, Observer {
 			Point monsterPos = monster.getPos().getLocation();
 			this.tileMap[monsterPos.x][monsterPos.y] = model.element(' ', monsterPos);
 			this.monsters.remove(nextElement);
+			this.score += 500;
 		} else if(nextElement.contains("Door") ||
 				nextElement.contains("Purse") ||
 				nextElement.contains("Crystal")) {
